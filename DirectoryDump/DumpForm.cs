@@ -13,6 +13,7 @@ namespace DirectoryDump
         private const string CREATED_DATE = "Created date";
         private const string UPDATED_DATE = "Updated date";
         private const string FILE_NAME = "File name";
+        private const string OUTPUT = "output";
 
         public DumpForm()
         {
@@ -23,6 +24,19 @@ namespace DirectoryDump
             comboOrder.Items.Add(CREATED_DATE);
             comboOrder.Items.Add(UPDATED_DATE);
             comboOrder.Items.Add(FILE_NAME);
+
+            comboOrder.SelectedIndex = 2;
+
+            buttonOpenOutputFolder.Click += buttonOpenOutputFolder_Click;
+        }
+
+        private void buttonOpenOutputFolder_Click(object sender, EventArgs e)
+        {
+            var output = Path.Combine(Environment.CurrentDirectory, OUTPUT);
+            if (!Directory.Exists(output))
+                MessageBox.Show("'" + output + "' is not exist");
+            else
+                System.Diagnostics.Process.Start(output);
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -119,9 +133,13 @@ namespace DirectoryDump
             if (order == FILE_NAME)
                 files = files.OrderByDescending(f => f.Name).ToList();
 
-
-            //var files = DirDump(folder).OrderByDescending(f => f.LastModified);
+            // create sub folder
+            var output = "output";
+            if (!Directory.Exists(output))
+                Directory.CreateDirectory(output);
+            
             var filename = string.Format("dump-{1}-{0}", folderName, DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss"));
+            filename = Path.Combine(output, filename);
 
             if (radioText.Checked) // text
             {
