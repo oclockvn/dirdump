@@ -40,15 +40,22 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttonOpenOutputFolder = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.folderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.browseToolItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.openOutputFolderToolItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BrowseButton
             // 
-            this.BrowseButton.Location = new System.Drawing.Point(12, 12);
+            this.BrowseButton.Location = new System.Drawing.Point(12, 31);
             this.BrowseButton.Name = "BrowseButton";
             this.BrowseButton.Size = new System.Drawing.Size(75, 23);
             this.BrowseButton.TabIndex = 0;
@@ -58,14 +65,14 @@
             // 
             // DirTextBox
             // 
-            this.DirTextBox.Location = new System.Drawing.Point(12, 41);
+            this.DirTextBox.Location = new System.Drawing.Point(12, 60);
             this.DirTextBox.Name = "DirTextBox";
             this.DirTextBox.Size = new System.Drawing.Size(367, 20);
             this.DirTextBox.TabIndex = 1;
             // 
             // DumpButton
             // 
-            this.DumpButton.Location = new System.Drawing.Point(13, 125);
+            this.DumpButton.Location = new System.Drawing.Point(13, 144);
             this.DumpButton.Name = "DumpButton";
             this.DumpButton.Size = new System.Drawing.Size(75, 23);
             this.DumpButton.TabIndex = 2;
@@ -119,7 +126,7 @@
             // 
             this.groupBox1.Controls.Add(this.radioCsv);
             this.groupBox1.Controls.Add(this.radioText);
-            this.groupBox1.Location = new System.Drawing.Point(13, 74);
+            this.groupBox1.Location = new System.Drawing.Point(13, 93);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(104, 45);
             this.groupBox1.TabIndex = 8;
@@ -129,7 +136,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.comboOrder);
-            this.groupBox2.Location = new System.Drawing.Point(123, 74);
+            this.groupBox2.Location = new System.Drawing.Point(123, 93);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(144, 45);
             this.groupBox2.TabIndex = 9;
@@ -139,36 +146,81 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.checkOpenWhenDone);
-            this.groupBox3.Location = new System.Drawing.Point(273, 74);
+            this.groupBox3.Location = new System.Drawing.Point(273, 93);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(106, 45);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "open when done";
             // 
-            // buttonOpenOutputFolder
+            // menuStrip1
             // 
-            this.buttonOpenOutputFolder.Location = new System.Drawing.Point(261, 125);
-            this.buttonOpenOutputFolder.Name = "buttonOpenOutputFolder";
-            this.buttonOpenOutputFolder.Size = new System.Drawing.Size(118, 23);
-            this.buttonOpenOutputFolder.TabIndex = 11;
-            this.buttonOpenOutputFolder.Text = "Open output folder";
-            this.buttonOpenOutputFolder.UseVisualStyleBackColor = true;
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.folderToolStripMenuItem,
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(391, 24);
+            this.menuStrip1.TabIndex = 12;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // folderToolStripMenuItem
+            // 
+            this.folderToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.browseToolItem,
+            this.toolStripSeparator1,
+            this.openOutputFolderToolItem});
+            this.folderToolStripMenuItem.Name = "folderToolStripMenuItem";
+            this.folderToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.folderToolStripMenuItem.Text = "Folder";
+            // 
+            // browseToolItem
+            // 
+            this.browseToolItem.Name = "browseToolItem";
+            this.browseToolItem.Size = new System.Drawing.Size(176, 22);
+            this.browseToolItem.Text = "Browse";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
+            // 
+            // openOutputFolderToolItem
+            // 
+            this.openOutputFolderToolItem.Name = "openOutputFolderToolItem";
+            this.openOutputFolderToolItem.Size = new System.Drawing.Size(176, 22);
+            this.openOutputFolderToolItem.Text = "Open output folder";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // DumpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(391, 156);
-            this.Controls.Add(this.buttonOpenOutputFolder);
+            this.ClientSize = new System.Drawing.Size(391, 179);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DumpButton);
             this.Controls.Add(this.DirTextBox);
             this.Controls.Add(this.BrowseButton);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "DumpForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Directory Dump v1 by tien quang";
@@ -177,6 +229,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,7 +249,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button buttonOpenOutputFolder;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem folderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem browseToolItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem openOutputFolderToolItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

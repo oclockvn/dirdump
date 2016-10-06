@@ -27,7 +27,8 @@ namespace DirectoryDump
 
             comboOrder.SelectedIndex = 2;
 
-            buttonOpenOutputFolder.Click += buttonOpenOutputFolder_Click;
+            openOutputFolderToolItem.Click += buttonOpenOutputFolder_Click;
+            browseToolItem.Click += BrowseButton_Click;
         }
 
         private void buttonOpenOutputFolder_Click(object sender, EventArgs e)
@@ -71,7 +72,7 @@ namespace DirectoryDump
             return files;
         }
 
-        private List<DumpInfo> DirDump(string dir)
+        private List<DumpInfo> DirDump(string dir, bool relativePath=false)
         {
             var dumps = new List<DumpInfo>();
 
@@ -85,7 +86,7 @@ namespace DirectoryDump
                     {
                         CreatedDate = fi.CreationTime,
                         LastModified = fi.LastWriteTime,
-                        Name = fi.FullName
+                        Name = relativePath ? fi.FullName.Replace(fi.DirectoryName,string.Empty) : fi.FullName
                     };
                     dumps.Add(di);
                 }
