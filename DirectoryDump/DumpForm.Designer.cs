@@ -47,10 +47,24 @@
             this.openOutputFolderToolItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tabFunctions = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dateDelete = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ckbIncludeRemoveDate = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.labelDeleteReport = new System.Windows.Forms.Label();
+            this.statusBar = new System.Windows.Forms.StatusStrip();
+            this.labelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabFunctions.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.statusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // BrowseButton
@@ -203,15 +217,123 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel1.Location = new System.Drawing.Point(13, 174);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(366, 1);
+            this.panel1.TabIndex = 13;
+            // 
+            // tabFunctions
+            // 
+            this.tabFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabFunctions.Controls.Add(this.tabPage1);
+            this.tabFunctions.Location = new System.Drawing.Point(13, 182);
+            this.tabFunctions.Name = "tabFunctions";
+            this.tabFunctions.SelectedIndex = 0;
+            this.tabFunctions.Size = new System.Drawing.Size(366, 151);
+            this.tabFunctions.TabIndex = 14;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.labelDeleteReport);
+            this.tabPage1.Controls.Add(this.buttonDelete);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.ckbIncludeRemoveDate);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.dateDelete);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(358, 125);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Delete files";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dateDelete
+            // 
+            this.dateDelete.CustomFormat = "MM/dd/yyyy";
+            this.dateDelete.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateDelete.Location = new System.Drawing.Point(7, 26);
+            this.dateDelete.Name = "dateDelete";
+            this.dateDelete.Size = new System.Drawing.Size(200, 20);
+            this.dateDelete.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "From date (MM/dd/yyyy)";
+            // 
+            // ckbIncludeRemoveDate
+            // 
+            this.ckbIncludeRemoveDate.AutoSize = true;
+            this.ckbIncludeRemoveDate.Location = new System.Drawing.Point(213, 31);
+            this.ckbIncludeRemoveDate.Name = "ckbIncludeRemoveDate";
+            this.ckbIncludeRemoveDate.Size = new System.Drawing.Size(65, 17);
+            this.ckbIncludeRemoveDate.TabIndex = 2;
+            this.ckbIncludeRemoveDate.Text = "Include*";
+            this.ckbIncludeRemoveDate.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(328, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "(*) If checked, files modified from selected day will be deleted as well";
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(7, 97);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 4;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            // 
+            // labelDeleteReport
+            // 
+            this.labelDeleteReport.AutoSize = true;
+            this.labelDeleteReport.Location = new System.Drawing.Point(88, 102);
+            this.labelDeleteReport.Name = "labelDeleteReport";
+            this.labelDeleteReport.Size = new System.Drawing.Size(0, 13);
+            this.labelDeleteReport.TabIndex = 5;
+            // 
+            // statusBar
+            // 
+            this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.labelStatus});
+            this.statusBar.Location = new System.Drawing.Point(0, 336);
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Size = new System.Drawing.Size(391, 22);
+            this.statusBar.TabIndex = 15;
+            this.statusBar.Text = "statusStrip1";
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(0, 17);
             // 
             // DumpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(391, 179);
+            this.ClientSize = new System.Drawing.Size(391, 358);
+            this.Controls.Add(this.statusBar);
+            this.Controls.Add(this.tabFunctions);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -223,7 +345,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DumpForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Directory Dump v1 by tien quang";
+            this.Text = "Directory Dump v.1.1 by oclockvn";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -231,6 +353,11 @@
             this.groupBox3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabFunctions.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.statusBar.ResumeLayout(false);
+            this.statusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,6 +383,17 @@
         private System.Windows.Forms.ToolStripMenuItem openOutputFolderToolItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabControl tabFunctions;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox ckbIncludeRemoveDate;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateDelete;
+        private System.Windows.Forms.Label labelDeleteReport;
+        private System.Windows.Forms.StatusStrip statusBar;
+        private System.Windows.Forms.ToolStripStatusLabel labelStatus;
     }
 }
 

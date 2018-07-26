@@ -1,9 +1,11 @@
 ﻿using KBCsv;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DirectoryDump
@@ -14,6 +16,8 @@ namespace DirectoryDump
         private const string UPDATED_DATE = "Updated date";
         private const string FILE_NAME = "File name";
         private const string OUTPUT = "output";
+        public event Action<int, int> OnFileRemoveCompleted;
+        public event Action<string> OnNotification;
 
         public DumpForm()
         {
@@ -29,6 +33,79 @@ namespace DirectoryDump
 
             openOutputFolderToolItem.Click += buttonOpenOutputFolder_Click;
             browseToolItem.Click += BrowseButton_Click;
+            buttonDelete.Click += ButtonDelete_Click;
+            OnFileRemoveCompleted += DumpForm_OnFileRemoveCompleted;
+            OnNotification += DumpForm_OnNotification;
+        }
+
+        private void DumpForm_OnNotification(string message)
+        {
+            statusBar.Invoke(new Action(() =>
+            {
+                labelStatus.Text = message;
+            }));
+        }
+
+        private void DumpForm_OnFileRemoveCompleted(int deleted, int total)
+        {   
+            labelDeleteReport.Invoke(new Action(() =>
+            {
+                labelDeleteReport.Text = $"{deleted}/{total} files were deleted";
+            }));
+        }
+
+        private async void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            labelDeleteReport.Text = string.Empty;
+            var date = dateDelete.Value;
+            var includeDate = ckbIncludeRemoveDate.Checked; // if include, remove `date` files as well
+
+            var can = CanI(out string dir);
+            if (!can)
+                return;
+
+            var files = DirDump(dir);
+            if (files.Count == 0)
+                return;
+
+            var totalFile = files.Count;
+            var totalDeleted = 0;
+
+            var deleteFiles = files.Where(x => x.LastModified.Date < date.Date || (x.LastModified.Date == date.Date && includeDate)).ToList();
+
+            foreach (var file in deleteFiles)
+            {
+                await Task.Delay(100);
+
+                if (DeleteFile(file.Path))
+                    totalDeleted++;
+
+                OnFileRemoveCompleted?.Invoke(totalDeleted, totalFile);
+                OnNotification?.Invoke($"Deleting {file.Name}...");
+            }
+
+            Debug.WriteLine($"Total {totalDeleted} files were deleted");
+            var text = $"{totalDeleted}/{totalFile} files were deleted";
+            labelDeleteReport.Text = text;
+            labelStatus.Text = text;
+            MessageBox.Show($"{totalDeleted}/{totalFile} files were deleted", "Completed");
+        }
+
+        private bool DeleteFile(string path)
+        {
+            try
+            {
+                File.Delete(path);
+                Debug.WriteLine($"File {path} was deleted!");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message + e.StackTrace);
+                MessageBox.Show(e.Message, "Delete error");
+            }
+
+            return false;
         }
 
         private void buttonOpenOutputFolder_Click(object sender, EventArgs e)
@@ -82,11 +159,12 @@ namespace DirectoryDump
                 foreach (var f in Directory.GetFiles(dir))
                 {
                     var fi = new FileInfo(f);
-                    var di = new DumpInfo()
+                    var di = new DumpInfo
                     {
                         CreatedDate = fi.CreationTime,
                         LastModified = fi.LastWriteTime,
-                        Name = relativePath ? fi.FullName.Replace(fi.DirectoryName,string.Empty) : fi.FullName
+                        Path = relativePath ? fi.FullName.Replace(fi.DirectoryName,string.Empty) : fi.FullName,
+                        Name = fi.Name
                     };
                     dumps.Add(di);
                 }
@@ -132,7 +210,7 @@ namespace DirectoryDump
             if (order == UPDATED_DATE)
                 files = files.OrderByDescending(f => f.LastModified).ToList();
             if (order == FILE_NAME)
-                files = files.OrderByDescending(f => f.Name).ToList();
+                files = files.OrderByDescending(f => f.Path).ToList();
 
             // create sub folder
             var output = "output";
@@ -146,7 +224,7 @@ namespace DirectoryDump
             {
                 filename += ".txt";
 
-                var names = files.Select(f => f.Name).ToList();
+                var names = files.Select(f => f.Path).ToList();
                 File.WriteAllLines(filename, names, Encoding.UTF8);
             }
             else // csv
@@ -164,7 +242,7 @@ namespace DirectoryDump
                         await writer.WriteRecordAsync(
                             f.CreatedDate.ToString("MM/dd/yyyy hh:mm:ss tt"),
                             f.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt"),
-                            f.Name);
+                            f.Path);
 
                         /*
                         await writer.WriteRecordAsync("Created Date", f.CreatedDate.ToString("MM/dd/yyyy hh:mm tt"));
@@ -180,6 +258,24 @@ namespace DirectoryDump
                 System.Diagnostics.Process.Start(filename);
 
             MessageBox.Show("done!");
+        }
+
+        private bool CanI(out string dir)
+        {
+            dir = DirTextBox.Text;
+            if (string.IsNullOrEmpty(dir))
+            {
+                MessageBox.Show("browse a directory, mother f*cker");
+                return false;
+            }
+
+            if (!Directory.Exists(dir))
+            {
+                MessageBox.Show("This folder is not exist, baka");
+                return false;
+            }
+
+            return true;
         }
     }
 }
